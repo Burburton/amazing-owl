@@ -1,0 +1,64 @@
+# Amazing Owl - Git Ignore
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build artifacts
+*.tsbuildinfo
+
+# ============================================
+# Development tooling (NOT for GitHub)
+# ============================================
+
+# OpenCode / AI development tool config
+.opencode/
+
+# Feature development tracking (internal workflow)
+specs/
+
+# Sisyphus work session data
+.sisyphus/
+
+# ============================================
+# Dependencies that are referenced, not tracked
+# ============================================
+
+# amazing-specialists is a sibling dependency
+# Referenced via config, not copied into owl
+amazing-specialists/
