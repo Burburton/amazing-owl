@@ -1,0 +1,38 @@
+{
+  "name": "amazing-owl",
+  "version": "0.1.0",
+  "description": "Layer 2 Orchestration Layer for Amazing Ecosystem",
+  "main": "dist/app/owl-app.js",
+  "types": "dist/app/owl-app.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "clean": "rimraf dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "orchestration",
+    "ai-native",
+    "spec-driven",
+    "workflow"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "rimraf": "^5.0.5",
+    "vitest": "^1.2.0",
+    "@vitest/coverage-v8": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
