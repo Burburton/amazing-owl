@@ -1,0 +1,18 @@
+{
+  "request_id": "owl-003",
+  "raw_input": "Improve the context loader performance by implementing lazy loading for config file parsers. Currently all parsers run even when their config files don't exist.",
+  "request_type": "enhancement",
+  "stage_hint": "new",
+  "context": {
+    "project_path": "./",
+    "existing_files": [
+      "src/context/context-loader.ts",
+      "src/context/config-parsers/"
+    ],
+    "constraints": [
+      "Must not break existing API",
+      "Performance improvement should be measurable",
+      "Keep the caching mechanism intact"
+    ]
+  }
+}

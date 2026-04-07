@@ -1,0 +1,17 @@
+{
+  "request_id": "owl-002",
+  "raw_input": "Fix the bug where the normalizer fails to generate slugs for inputs containing Chinese characters. The current slug generator only handles ASCII and causes malformed identifiers.",
+  "request_type": "bugfix",
+  "stage_hint": "new",
+  "context": {
+    "project_path": "./",
+    "existing_files": [
+      "src/normalizer/slug-generator.ts",
+      "tests/normalizer/slug-generator.test.ts"
+    ],
+    "constraints": [
+      "Must preserve backward compatibility with existing slug format",
+      "Test coverage must remain at 100%"
+    ]
+  }
+}

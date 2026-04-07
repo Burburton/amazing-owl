@@ -1,0 +1,14 @@
+{
+  "request_id": "owl-004",
+  "raw_input": "Continue the authentication feature implementation. The spec and plan are complete, tasks are generated, and we need to proceed with implementation.",
+  "request_type": "feature",
+  "stage_hint": "tasks_complete",
+  "context": {
+    "project_path": "./",
+    "existing_files": [
+      "specs/002-authentication-feature/spec.md",
+      "specs/002-authentication-feature/plan.md",
+      "specs/002-authentication-feature/tasks.md"
+    ]
+  }
+}

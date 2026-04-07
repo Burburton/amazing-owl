@@ -1,0 +1,14 @@
+{
+  "request_id": "owl-001",
+  "raw_input": "I want to add a feedback triage feature for amazing-specialists. The goal is to enable a triage-oriented workflow that helps product managers categorize and prioritize incoming user feedback.",
+  "request_type": "feature",
+  "stage_hint": "new",
+  "context": {
+    "project_path": "../amazing-specialists",
+    "constraints": [
+      "Must reuse existing execution model",
+      "Should integrate with existing spec-driven workflow",
+      "UI is out of scope for MVP"
+    ]
+  }
+}
