@@ -2,6 +2,7 @@ import type { OwlRequest, OwlResponse } from '../contracts';
 import { runPipeline, type PipelineOptions } from './pipeline';
 import { SessionManager, type Session } from './session-manager';
 import { generateRequestId } from '../intake/request-id-generator';
+import { classifyRequest } from '../intake/request-classifier';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger('owl-app');
@@ -80,10 +81,12 @@ export class OwlApp {
     rawInput: string,
     options?: { requestType?: 'feature' | 'bugfix' | 'enhancement' | 'unknown'; stageHint?: string }
   ): Promise<OwlResponse> {
+    const classifiedType = options?.requestType ?? classifyRequest(rawInput);
+    
     const request: OwlRequest = {
       request_id: generateRequestId(),
       raw_input: rawInput,
-      request_type: options?.requestType ?? 'unknown',
+      request_type: classifiedType,
       stage_hint: options?.stageHint as OwlRequest['stage_hint'],
     };
 

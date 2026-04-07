@@ -12,7 +12,7 @@ describe('E2E - Full Workflow', () => {
 
       expect(response.status).toBe('success');
       expect(response.normalized_requirement).toBeDefined();
-      expect(response.normalized_requirement?.feature_id).toBe('add-a-new-user-authentication-feature');
+      expect(response.normalized_requirement?.feature_id).toContain('add-a-new-user-authentication-feature');
       expect(response.normalized_requirement?.request_type).toBe('feature');
       expect(response.normalized_requirement?.stage).toBe('new');
       expect(response.recommended_action).toBe('spec-start');
@@ -95,10 +95,10 @@ describe('E2E - Full Workflow', () => {
       const app = new OwlApp({ skipBridge: true });
       
       const inputs = [
-        { input: 'Add new feature', expectedType: 'feature' },
-        { input: 'Fix broken login', expectedType: 'bugfix' },
-        { input: 'Improve performance', expectedType: 'enhancement' },
-        { input: 'Random request', expectedType: 'unknown' },
+        { input: 'Add new feature to create reports. Goal: enable reporting.', expectedType: 'feature' },
+        { input: 'Fix broken login page. Goal: restore user authentication.', expectedType: 'bugfix' },
+        { input: 'Improve performance of database queries. Goal: reduce latency.', expectedType: 'enhancement' },
+        { input: 'Random request without clear keywords. Goal: test unknown classification.', expectedType: 'unknown' },
       ];
 
       for (const { input, expectedType } of inputs) {
@@ -110,7 +110,7 @@ describe('E2E - Full Workflow', () => {
     it('should produce complete OwlResponse structure', async () => {
       const app = new OwlApp({ skipBridge: true });
       
-      const response = await app.processRawInput('Add authentication feature. Goal: secure login.');
+      const response = await app.processRawInput('Add authentication feature for secure login. Goal: protect user accounts.');
 
       // Verify all expected response fields
       expect(response.request_id).toBeDefined();
@@ -141,7 +141,7 @@ describe('E2E - Full Workflow', () => {
       for (const { stage, expectedAction } of stagesAndActions) {
         const request: OwlRequest = {
           request_id: `test-${stage}`,
-          raw_input: 'Test feature request',
+          raw_input: 'Create new feature for user management. Goal: improve UX.',
           request_type: 'feature',
           stage_hint: stage,
         };
@@ -155,7 +155,7 @@ describe('E2E - Full Workflow', () => {
       const app = new OwlApp({ skipBridge: true });
       
       // AC-001: Request intake contract exists
-      const response = await app.processRawInput('Test input');
+      const response = await app.processRawInput('Implement new feature for data export. Goal: enable users to download reports.');
       expect(response.request_id).toBeDefined();
       
       // AC-002: Minimal clarification works

@@ -6,6 +6,7 @@ import { route } from '../planner/planner-router';
 import { buildPayload } from '../bridge/payload-builder';
 import { evaluate, type EvaluationResult } from '../evaluator/result-evaluator';
 import { CliBridge } from '../bridge/cli-bridge';
+import { loadProjectContext } from '../context/context-loader';
 import { createLogger } from '../utils/logger';
 import { ValidationError, RoutingError, BridgeError } from '../utils/errors';
 
@@ -14,6 +15,7 @@ const logger = createLogger('pipeline');
 export interface PipelineOptions {
   skipBridge?: boolean;
   dryRun?: boolean;
+  skipContextLoad?: boolean;
 }
 
 export async function runPipeline(
@@ -30,6 +32,10 @@ export async function runPipeline(
     if (clarificationResult.needs_clarification) {
       logger.info('pipeline_needs_clarification', { request_id: requestId });
       return buildClarificationResponse(request, clarificationResult);
+    }
+
+    if (!options?.skipContextLoad) {
+      await runContextLoading(request);
     }
 
     const normalizedRequirement = runNormalization(request);
@@ -62,6 +68,32 @@ export async function runPipeline(
 async function runClarification(request: OwlRequest): Promise<ClarificationResult> {
   logger.debug('pipeline_step_clarification', { request_id: request.request_id });
   return clarify(request);
+}
+
+async function runContextLoading(request: OwlRequest): Promise<void> {
+  logger.debug('pipeline_step_context_loading', { request_id: request.request_id });
+  
+  try {
+    const projectContext = await loadProjectContext(request.context?.project_path);
+    
+    if (projectContext) {
+      if (!request.context) {
+        request.context = {};
+      }
+      request.context.project_context = projectContext;
+      
+      logger.info('pipeline_context_loaded', {
+        request_id: request.request_id,
+        project_name: projectContext.project_name,
+        tech_stack: projectContext.tech_stack,
+      });
+    }
+  } catch (error) {
+    logger.warn('pipeline_context_load_failed', {
+      request_id: request.request_id,
+      error: String(error),
+    });
+  }
 }
 
 function runNormalization(request: OwlRequest): NormalizedRequirement {
@@ -140,12 +172,18 @@ function buildRoutedResponse(
   request: OwlRequest,
   requirement: NormalizedRequirement,
   routing: { action: string }
-): OwlResponse {
+  ): OwlResponse {
+  const payload = buildPayload(
+    requirement,
+    routing.action as 'spec-start' | 'spec-plan' | 'spec-tasks' | 'spec-implement' | 'spec-audit'
+  );
+  
   return {
     request_id: request.request_id,
     status: 'success',
     normalized_requirement: requirement,
     recommended_action: routing.action as 'spec-start' | 'spec-plan' | 'spec-tasks' | 'spec-implement' | 'spec-audit',
+    dispatch_payload: payload,
     notes: ['Routing complete. Bridge execution skipped.'],
   };
 }
