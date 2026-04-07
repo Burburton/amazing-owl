@@ -2,6 +2,21 @@
 
 > Layer 2 Orchestration Layer for Amazing Ecosystem
 
+[![Status](https://img.shields.io/badge/Status-MVP%20Complete-brightgreen)](https://github.com/Burburton/amazing-owl)
+[![Tests](https://img.shields.io/badge/Tests-309%20Passing-brightgreen)](https://github.com/Burburton/amazing-owl)
+[![Version](https://img.shields.io/badge/Version-0.2.0-blue)](https://github.com/Burburton/amazing-owl)
+
+## 项目状态
+
+| Milestone | Status | Description |
+|-----------|--------|-------------|
+| MVP Core (v0.1.0) | ✅ Complete | 核心编排能力 |
+| Context Loader (v0.2.0) | ✅ Complete | 仓库上下文自动加载 |
+| Example Files | ✅ Complete | 示例请求文件 |
+| Audit | ✅ Approved | 2026-04-07 审计通过 |
+
+**详细信息**: [MVP Completion Report](specs/001-owl-core-mvp/completion-report.md)
+
 ## 项目简介
 
 Amazing Owl 是 Amazing 系列的 Layer 2 编排和管理组件，位于用户输入层和执行层（amazing-specialists）之间，负责将原始用户请求转换为结构化的可执行工作，并协调交付工作流的下一步。
@@ -185,8 +200,10 @@ amazing-owl/
 
 ## 使用示例
 
+### 基本用法
+
 ```typescript
-import { OwlApp } from './src/app/owl-app';
+import { OwlApp } from 'amazing-owl';
 
 const app = new OwlApp({ skipBridge: true });
 
@@ -199,6 +216,15 @@ console.log(response.status);        // 'success'
 console.log(response.normalized_requirement?.feature_id);  // 'add-a-new-user-authentication-feature'
 console.log(response.recommended_action);  // 'spec-start'
 ```
+
+### 示例请求文件
+
+查看 `examples/` 目录获取完整的请求示例：
+
+- [sample-feature-request.json](examples/sample-feature-request.json) - 新功能请求
+- [sample-bug-request.json](examples/sample-bug-request.json) - Bug 修复请求
+- [sample-enhancement-request.json](examples/sample-enhancement-request.json) - 增强请求
+- [sample-continue-work-request.json](examples/sample-continue-work-request.json) - 继续现有工作流
 
 ## 核心合约
 
@@ -270,6 +296,29 @@ type WorkflowStage =
 - 具体的开发工作流执行
 - spec/plan/tasks 的生成和管理
 - 实际的代码实现
+
+## 路线图
+
+### v0.1.x (维护)
+
+- [x] MVP 核心功能
+- [x] 309 测试覆盖
+- [x] 示例文件
+- [x] 审计通过
+
+### v0.2.x (计划中)
+
+- [ ] CLI 命令行工具
+- [ ] 更多集成测试场景
+- [ ] 改进错误消息质量
+
+### v0.3.0 (未来)
+
+- [ ] 异步执行支持
+- [ ] 持久化存储
+- [ ] API 服务模式
+- [ ] NLP 驱动的智能分类
+- [ ] GitHub 集成
 
 ## License
 
