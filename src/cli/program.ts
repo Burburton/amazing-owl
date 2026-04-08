@@ -6,8 +6,8 @@
 
 import { Command } from 'commander';
 import { processCommand } from './commands/process';
+import { templateCommand } from './commands/template';
 
-// Read version from package.json
 const version = require('../../package.json').version;
 
 export const program = new Command();
@@ -17,5 +17,5 @@ program
   .description('Layer 2 Orchestration Layer for Amazing Ecosystem')
   .version(version);
 
-// Add process command
 program.addCommand(processCommand);
+program.addCommand(templateCommand);

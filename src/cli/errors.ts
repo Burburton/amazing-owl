@@ -17,6 +17,13 @@ export class CLIError extends Error {
   }
 }
 
+export class TemplateError extends CLIError {
+  constructor(message: string, exitCode: number = 1) {
+    super(message, exitCode);
+    this.name = 'TemplateError';
+  }
+}
+
 /**
  * Handle an error and exit with appropriate code
  */
