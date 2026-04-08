@@ -3,7 +3,7 @@
 > Layer 2 Orchestration Layer for Amazing Ecosystem
 
 [![Status](https://img.shields.io/badge/Status-MVP%20Complete-brightgreen)](https://github.com/Burburton/amazing-owl)
-[![Tests](https://img.shields.io/badge/Tests-309%20Passing-brightgreen)](https://github.com/Burburton/amazing-owl)
+[![Tests](https://img.shields.io/badge/Tests-344%20Passing-brightgreen)](https://github.com/Burburton/amazing-owl)
 [![Version](https://img.shields.io/badge/Version-0.2.0-blue)](https://github.com/Burburton/amazing-owl)
 
 ## 项目状态
@@ -12,10 +12,11 @@
 |-----------|--------|-------------|
 | MVP Core (v0.1.0) | ✅ Complete | 核心编排能力 |
 | Context Loader (v0.2.0) | ✅ Complete | 仓库上下文自动加载 |
+| CLI Tool (v0.2.0) | ✅ Complete | 命令行接口 |
 | Example Files | ✅ Complete | 示例请求文件 |
-| Audit | ✅ Approved | 2026-04-07 审计通过 |
+| Audit | ✅ Approved | 2026-04-07 MVP 审计通过 |
 
-**详细信息**: [MVP Completion Report](specs/001-owl-core-mvp/completion-report.md)
+**详细信息**: [MVP Completion Report](specs/001-owl-core-mvp/completion-report.md) | [CLI Completion Report](specs/002-cli-tool/completion-report.md)
 
 ## 项目简介
 
@@ -217,6 +218,44 @@ console.log(response.normalized_requirement?.feature_id);  // 'add-a-new-user-au
 console.log(response.recommended_action);  // 'spec-start'
 ```
 
+### CLI 命令行工具
+
+amazing-owl 提供了命令行工具，无需编写代码即可使用：
+
+```bash
+# 安装
+npm install -g amazing-owl
+
+# 基本使用
+owl process "Add a new user authentication feature"
+
+# 指定请求类型
+owl process "Fix the login bug" --type bugfix
+
+# 继续现有工作流
+owl process "Continue auth feature" --stage spec_exists
+
+# 调试模式
+owl process "Add feature" --debug --dry-run
+
+# JSON 输出
+owl process "Add feature" --output json
+
+# 查看帮助
+owl --help
+owl process --help
+```
+
+#### CLI 选项
+
+- `--type <type>` - 请求类型 (feature|bugfix|enhancement|unknown)
+- `--stage <stage>` - 工作流阶段提示
+- `--dry-run` - 跳过 bridge 执行（仅路由）
+- `--debug` - 启用详细日志
+- `--output <format>` - 输出格式 (text|json)
+- `--version` - 显示版本号
+- `--help` - 显示帮助信息
+
 ### 示例请求文件
 
 查看 `examples/` 目录获取完整的请求示例：
@@ -306,9 +345,10 @@ type WorkflowStage =
 - [x] 示例文件
 - [x] 审计通过
 
-### v0.2.x (计划中)
+### v0.2.x (当前版本)
 
-- [ ] CLI 命令行工具
+- [x] CLI 命令行工具 ✅
+- [x] 344 测试覆盖
 - [ ] 更多集成测试场景
 - [ ] 改进错误消息质量
 
