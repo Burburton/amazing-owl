@@ -1,9 +1,12 @@
 {
   "name": "amazing-owl",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Layer 2 Orchestration Layer for Amazing Ecosystem",
   "main": "dist/app/owl-app.js",
   "types": "dist/app/owl-app.d.ts",
+  "bin": {
+    "owl": "./bin/owl"
+  },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
@@ -19,10 +22,14 @@
     "orchestration",
     "ai-native",
     "spec-driven",
-    "workflow"
+    "workflow",
+    "cli"
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "eslint": "^8.56.0",
