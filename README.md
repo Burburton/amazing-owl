@@ -3,7 +3,7 @@
 > Layer 2 Orchestration Layer for Amazing Ecosystem
 
 [![Status](https://img.shields.io/badge/Status-MVP%20Complete-brightgreen)](https://github.com/Burburton/amazing-owl)
-[![Tests](https://img.shields.io/badge/Tests-344%20Passing-brightgreen)](https://github.com/Burburton/amazing-owl)
+[![Tests](https://img.shields.io/badge/Tests-392%20Passing-brightgreen)](https://github.com/Burburton/amazing-owl)
 [![Version](https://img.shields.io/badge/Version-0.2.0-blue)](https://github.com/Burburton/amazing-owl)
 
 ## 项目状态
@@ -13,10 +13,11 @@
 | MVP Core (v0.1.0) | ✅ Complete | 核心编排能力 |
 | Context Loader (v0.2.0) | ✅ Complete | 仓库上下文自动加载 |
 | CLI Tool (v0.2.0) | ✅ Complete | 命令行接口 |
+| Workflow Templates (v0.2.0) | ✅ Complete | 工作流模板 |
 | Example Files | ✅ Complete | 示例请求文件 |
 | Audit | ✅ Approved | 2026-04-07 MVP 审计通过 |
 
-**详细信息**: [MVP Completion Report](specs/001-owl-core-mvp/completion-report.md) | [CLI Completion Report](specs/002-cli-tool/completion-report.md)
+**详细信息**: [MVP Completion Report](specs/001-owl-core-mvp/completion-report.md) | [CLI Completion Report](specs/002-cli-tool/completion-report.md) | [Templates Completion Report](specs/005-workflow-templates/completion-report.md)
 
 ## 项目简介
 
@@ -256,6 +257,55 @@ owl process --help
 - `--version` - 显示版本号
 - `--help` - 显示帮助信息
 
+### 工作流模板
+
+amazing-owl 提供工作流模板，快速启动常见类型的开发工作流：
+
+```bash
+# 查看可用模板
+owl template list
+
+# 查看模板详情
+owl template show feature
+
+# 使用模板生成请求
+owl template feature -n "user-authentication" -g "enable secure login"
+
+# 带可选参数
+owl template feature -n "auth" -g "secure login" -s "API only"
+
+# 生成并直接处理
+owl template feature -n "auth" -g "login" --process
+
+# JSON 输出
+owl template feature -n "auth" -g "login" --json
+```
+
+#### 内置模板
+
+| 模板 | 类型 | 必需参数 | 描述 |
+|------|------|----------|------|
+| feature | feature | name, goal | 新功能开发 |
+| bugfix | bugfix | bug, symptom | Bug 修复 |
+| enhancement | enhancement | target, goal | 功能增强 |
+| refactor | enhancement | target, reason | 代码重构 |
+
+#### 模板参数
+
+每个模板支持简写参数：
+
+**feature 模板**:
+- `-n, --name` - 功能名称 (必需)
+- `-g, --goal` - 功能目标 (必需)
+- `-s, --scope` - 功能范围 (可选)
+- `-c, --constraints` - 技术约束 (可选)
+
+**bugfix 模板**:
+- `-b, --bug` - Bug 描述 (必需)
+- `-s, --symptom` - 问题症状 (必需)
+- `-l, --location` - 问题位置 (可选)
+- `-r, --repro` - 复现步骤 (可选)
+
 ### 示例请求文件
 
 查看 `examples/` 目录获取完整的请求示例：
@@ -348,7 +398,8 @@ type WorkflowStage =
 ### v0.2.x (当前版本)
 
 - [x] CLI 命令行工具 ✅
-- [x] 344 测试覆盖
+- [x] 工作流模板 ✅
+- [x] 392 测试覆盖
 - [ ] 更多集成测试场景
 - [ ] 改进错误消息质量
 
