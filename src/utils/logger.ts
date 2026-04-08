@@ -41,6 +41,6 @@ export class Logger {
       data: data ?? undefined,
       request_id: requestId ?? undefined,
     };
-    process.stdout.write(JSON.stringify(entry) + '\n');
+    process.stderr.write(JSON.stringify(entry) + '\n');
   }
 }
